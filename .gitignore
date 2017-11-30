@@ -16,10 +16,25 @@
 *.exe
 *.out
 *.app
+src/caskbench
 
+# CMake build files
 build*
-INSTALL
+dist
+CMakeFiles
+CMakeCache.txt
 Makefile
+install_manifest.txt
+cmake_install.cmake
+cmake_uninstall.cmake
+compile_commands.json
+
+# Generated files
+config.h
+src/git_info.cpp
+src/tests.cpp
+
+# Misc
 *.pc
 *~
 *.bak
@@ -40,6 +55,8 @@ core
 *.tar.gz
 
 # Test output
+Testing
+CTestTestfile.cmake
 cairo-*.png
 skia-*.png
 results-*
