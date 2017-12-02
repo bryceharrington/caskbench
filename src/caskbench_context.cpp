@@ -70,6 +70,14 @@ context_setup_cairo(caskbench_context_t *context, const device_config_t& config)
 #else
         errx(1, "egl unsupported in this build\n");
 #endif
+    } else if (!strncmp(config.surface_type, "xcb", 3)) {
+#if USE_XCB
+        context->setup_cairo = create_cairo_surface_xcb;
+        context->destroy_cairo = destroy_cairo_xcb;
+        context->update_cairo = update_cairo_xcb;
+#else
+        errx(1, "xcb unsupported in this build\n");
+#endif
     }
     assert (context->setup_cairo);
     assert (context->destroy_cairo);

@@ -30,6 +30,7 @@ option(ENABLE_SKIA "Build in skia tests" ON)
 option(ENABLE_CAIRO "Build in cairo tests" ON)
 option(ENABLE_GLX "Build against GLX for OpenGL" OFF)
 option(ENABLE_EGL "Build against EGL for OpenGL" ON)
+option(ENABLE_XCB "Build against XCB for X11" ON)
 option(ENABLE_CAIROGLES "Use the cairogles fork API additions" OFF)
 
 # ----------------------------------------------------------------------
@@ -120,6 +121,28 @@ if (ENABLE_EGL)
   endif (EGL_LIBRARIES)
 endif (ENABLE_EGL)
 
+set(USE_XCB 0)
+if (ENABLE_XCB)
+  set(XCB_LIBRARIES "")
+
+  find_package(XCB)
+  if (XCB_FOUND)
+    message("Using XCB libraries for X11")
+    list(APPEND CASKBENCH_INCS_SYS ${XCB_INCLUDE_DIRS})
+    list(APPEND XCB_LIBRARIES ${XCB_LIBRARIES})
+    check_include_files(xcb/xcb.h HAVE_XCB_H)
+    set(USE_XCB 1)
+  else (XCB_FOUND)
+    message("find_package did not find XCB")
+  endif (XCB_FOUND)
+
+  if (XCB_LIBRARIES)
+    list(REMOVE_DUPLICATES XCB_LIBRARIES)
+    list(APPEND CASKBENCH_LIBS ${XCB_LIBRARIES})
+    list(APPEND CASKBENCH_LIBS xcb)
+  endif (XCB_LIBRARIES)
+endif (ENABLE_XCB)
+
 # ----------------------------------------------------------------------
 # Build
 # ----------------------------------------------------------------------
@@ -178,6 +201,7 @@ message("SKIA:                    ${ENABLE_SKIA} -> ${USE_SKIA}")
 message("CAIRO:                   ${ENABLE_CAIRO} -> ${USE_CAIRO}")
 message("GLX:                     ${ENABLE_GLX} -> ${USE_GLX}")
 message("EGL:                     ${ENABLE_EGL} -> ${USE_EGL}")
+message("XCB:                     ${ENABLE_XCB} -> ${USE_XCB}")
 message("OPENGLES2:               ${OPENGLES2_FOUND}")
 message("OPENGLES3:               ${OPENGLES3_FOUND}")
 message("CAIROGLES:               ${ENABLE_CAIROGLES}")

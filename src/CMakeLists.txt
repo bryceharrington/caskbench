@@ -20,6 +20,12 @@ if (USE_EGL)
     )
 endif (USE_EGL)
 
+if (USE_XCB)
+  list(APPEND caskbench_SOURCES
+    xcb.cpp
+    )
+endif (USE_XCB)
+
 if (USE_SKIA)
   file(GLOB skia_files 
     skia-util.cpp
@@ -34,6 +40,9 @@ if (USE_SKIA)
   if (USE_EGL)
     list(APPEND caskbench_SOURCES skia-egl.cpp)
   endif (USE_EGL)
+  if (USE_XCB)
+    list(APPEND caskbench_SOURCES skia-xcb.cpp)
+  endif (USE_XCB)
 endif (USE_SKIA)
 
 if (USE_CAIRO)
@@ -50,6 +59,9 @@ if (USE_CAIRO)
   if (USE_EGL)
     list(APPEND caskbench_SOURCES cairo-egl.cpp)
   endif (USE_EGL)
+  if (USE_XCB)
+    list(APPEND caskbench_SOURCES cairo-xcb.cpp)
+  endif (USE_XCB)
 endif (USE_CAIRO)
 
 add_executable(generate_tests IMPORTED)

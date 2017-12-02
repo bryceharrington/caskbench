@@ -113,6 +113,9 @@ print_surfaces_available()
 #if USE_EGL
     printf("egl\n");
 #endif
+#if USE_XCB
+    printf("xcb\n");
+#endif
 }
 
 static void

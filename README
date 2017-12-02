@@ -17,11 +17,11 @@ optimization work to high level benchmarking of devices.
 
 == Building ==
 
-Prerequisites include popt and gles3.  To install these on Ubuntu 13.04:
+Prerequisites include popt, gles, and xcb.  To install these on Ubuntu:
 
- $ sudo apt-get install libpopt-dev libgles2-mesa-dev
+ $ sudo apt-get install libpopt-dev libgles2-mesa-dev libxcb1-dev
 
-You will also need Skia and a GL-enabled version of libcairo installed.
+You may also need Skia and a GL-enabled version of libcairo installed.
 These aren't packaged for Ubuntu currently, so you'll need to build from
 source.
 

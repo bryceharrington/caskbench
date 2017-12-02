@@ -68,6 +68,11 @@ void destroy_skia_egl();
 void update_skia_egl();
 #endif
 
+#if USE_XCB
+cairo_surface_t * create_cairo_surface_xcb (const device_config_t& config);
+void destroy_cairo_xcb();
+void update_cairo_xcb();
+#endif
 
 // Context initialization and management
 void context_init(caskbench_context_t *context, int size);

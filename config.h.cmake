@@ -8,8 +8,9 @@
 #cmakedefine USE_SKIA 1
 #cmakedefine USE_CAIRO 1
 #cmakedefine USE_EGL 1
-#cmakedefine USE_GLX 0
-#cmakedefine USE_CAIROGLES 0
+#cmakedefine USE_GLX 1
+#cmakedefine USE_XCB 1
+#cmakedefine USE_CAIROGLES 1
 
 #define PACKAGE "${PROJECT_NAME}"
 #define PACKAGE_NAME "${PROJECT_NAME}"
